@@ -1,0 +1,162 @@
+const WORKOUT_PROGRAM = {
+  "Tuesday": [
+    {
+      "name": "Bench Press",
+      "sets_reps": "4x6-8",
+      "rir": "RIR 1-2, Son set failure"
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "sets_reps": "4x6-8",
+      "rir": "RIR 1-2, Son set failure"
+    },
+    {
+      "name": "Cable Cross",
+      "sets_reps": "3x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Overhead Press",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Lateral Raise",
+      "sets_reps": "4x12-15",
+      "rir": "Beyond failure"
+    },
+    {
+      "name": "Rear Delt",
+      "sets_reps": "3x12-15",
+      "rir": "Beyond failure"
+    },
+    {
+      "name": "Triceps Pushdown",
+      "sets_reps": "4x8-10",
+      "rir": "Failure"
+    }
+  ],
+  "Wednesday": [
+    {
+      "name": "Lat Pulldown",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1-2, Son set failure"
+    },
+    {
+      "name": "Barbell Row",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1-2, Son set failure"
+    },
+    {
+      "name": "Cable Row",
+      "sets_reps": "3x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Rope Pullover",
+      "sets_reps": "3x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Pull Up",
+      "sets_reps": "1x Max",
+      "rir": "Failure"
+    },
+    {
+      "name": "Barbell Curl",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1, Failure"
+    },
+    {
+      "name": "Dumbell Curl",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1, Failure"
+    }
+  ],
+  "Thursday": [
+    {
+      "name": "Squat",
+      "sets_reps": "4x8-10  2x12-15",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Leg Press",
+      "sets_reps": "4x8-10  2x12-15",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Leg Curl",
+      "sets_reps": "5x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Calf Raise",
+      "sets_reps": "4x15-20",
+      "rir": "Failure"
+    }
+  ],
+  "Saturday": [
+    {
+      "name": "Incline Dumbell Press",
+      "sets_reps": "4x6-8",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Cable Cross",
+      "sets_reps": "3x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Overhead Press",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Lateral Raise",
+      "sets_reps": "3x8-10 (Failure)  3x12-15 (Beyond failure)",
+      "rir": "Failure / Beyond failure"
+    },
+    {
+      "name": "Rear Delt",
+      "sets_reps": "3x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Triceps Pushdown",
+      "sets_reps": "4x8-10",
+      "rir": "Failure"
+    }
+  ],
+  "Sunday": [
+    {
+      "name": "Lat Pulldown",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1-2, Son set failure"
+    },
+    {
+      "name": "Cable Row",
+      "sets_reps": "4x12-15",
+      "rir": "Failure"
+    },
+    {
+      "name": "Romanian Deadlift",
+      "sets_reps": "4x8-10",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Dumbell Curl",
+      "sets_reps": "4x8-10",
+      "rir": "Failure"
+    },
+    {
+      "name": "Leg Press",
+      "sets_reps": "5x8-10",
+      "rir": "RIR 1-2"
+    },
+    {
+      "name": "Calf Raise",
+      "sets_reps": "4x15-20",
+      "rir": "Failure"
+    }
+  ]
+};
