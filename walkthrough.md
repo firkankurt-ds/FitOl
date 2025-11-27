@@ -59,3 +59,30 @@ FitOl V6 ile antrenman yönetimi akıllı hale geldi! Geçmiş antrenmanlar koru
     - Daha önceki bir tarih için bir antrenman kaydedin.
     - Takvimden o tarihe tıklayın.
     - Read-only banner ve devre dışı inputları görün.
+
+
+---
+
+## ✅ Deploy Test & Verification
+
+1. **Test commit** was pushed (`Update README and test auto‑deploy`).
+2. Open the Vercel dashboard: https://vercel.com/furkans-projects-9a07fd2a/fit-ol
+3. You should see a new deployment (≈ 30 s) with status **“Ready”** and the same production URL:
+   - https://fit-r9m7mvbax-furkans-projects-9a07fd2a.vercel.app
+4. Open that URL in a browser – the updated README should be visible.
+
+## 📱 iOS PWA Installation Guide
+
+1. Open the live URL on Safari (iPhone/iPad).
+2. Tap the **Share** button (square with arrow up).
+3. Choose **“Add to Home Screen”.**
+4. An app‑like icon (the 180 × 180 px Apple Touch Icon) will appear on the home screen.
+5. Launch the app from there – it runs fullscreen, without browser UI, and respects the dark theme.
+
+## 📖 Walkthrough Updates
+
+- Added steps for **auto‑deploy verification**.
+- Added **iOS PWA install instructions**.
+- Included the newly generated **Apple Touch Icon** (`public/icon-180.png`).
+
+---

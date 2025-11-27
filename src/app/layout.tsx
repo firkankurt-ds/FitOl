@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
+import SessionProvider from "@/components/providers/SessionProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-cormorant"
 });
 
 export const metadata: Metadata = {
@@ -37,9 +39,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${outfit.variable} ${cormorant.variable} antialiased font-sans bg-slate-950 text-slate-100 min-h-screen relative`}
       >
-        {children}
+        <div className="fixed inset-0 z-[-1]">
+          <img src="/bg-signin.png" alt="" className="w-full h-full object-cover opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/90 to-slate-950/95"></div>
+        </div>
+        <Head>
+          <link rel="apple-touch-icon" href="/icon-180.png" />
+          <meta name="theme-color" content="#000000" />
+        </Head>
+
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

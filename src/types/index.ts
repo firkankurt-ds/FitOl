@@ -4,6 +4,8 @@ export interface UserProfile {
   gender: 'Male' | 'Female' | 'Other';
   weight: number; // in kg
   age: number;
+  height?: number; // in cm
+  image?: string;
 }
 
 export interface WorkoutSet {
