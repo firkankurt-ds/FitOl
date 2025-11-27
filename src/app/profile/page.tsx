@@ -1,10 +1,10 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, User, Mail, Github, Edit2, Weight, CalendarDays, UserCircle, Ruler } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowLeft, User, Mail, Github, Edit2, Weight, CalendarDays, UserCircle, Ruler, LogOut } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { UserProfile } from "@/types";
 import { getUserProfile, saveUserProfile } from "@/lib/storage";
@@ -12,37 +12,53 @@ import { Modal } from "@/components/ui/Modal";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 
 export default function ProfilePage() {
-    const { data: session, status } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect("/auth/signin");
-        },
-    });
+    const { data: session, status } = useSession();
+    const router = useRouter();
 
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [isEditing, setIsEditing] = useState(false);
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
     useEffect(() => {
         // Load profile from storage or use defaults
         const storedProfile = getUserProfile();
+
         if (storedProfile) {
             setProfile(storedProfile);
-        } else {
-            // Default profile if none exists
-            setProfile({
-                firstName: session?.user?.name?.split(' ')[0] || 'User',
-                lastName: session?.user?.name?.split(' ')[1] || '',
+        } else if (session?.user) {
+            // If no local profile but session exists, create one
+            const newProfile: UserProfile = {
+                firstName: session.user.name?.split(' ')[0] || 'User',
+                lastName: session.user.name?.split(' ')[1] || '',
                 age: 25,
                 weight: 70,
-                gender: 'Male'
-            });
+                gender: 'Male',
+                height: 175,
+                image: session.user.image || undefined
+            };
+            saveUserProfile(newProfile);
+            setProfile(newProfile);
+        } else {
+            // No session and no profile -> redirect to signin
+            // But we check this after a short delay to ensure hydration
+            const timer = setTimeout(() => {
+                const currentProfile = getUserProfile();
+                if (!currentProfile && status === 'unauthenticated') {
+                    router.push('/auth/signin');
+                }
+            }, 100);
+            return () => clearTimeout(timer);
         }
-    }, [session]);
+    }, [session, status, router]);
 
     const handleSaveProfile = (updatedProfile: UserProfile) => {
         saveUserProfile(updatedProfile);
         setProfile(updatedProfile);
         setIsEditing(false);
+    };
+
+    const handleLogout = () => {
+        signOut({ callbackUrl: '/auth/signin' });
     };
 
     if (status === "loading" || !profile) {
@@ -140,25 +156,13 @@ export default function ProfilePage() {
                         </div>
                     </div>
 
-                    <div className="space-y-4">
-                        <div className="bg-slate-800/30 p-4 rounded-2xl border border-white/5">
-                            <div className="flex items-center gap-3 mb-2">
-                                <Github size={20} className="text-slate-400" />
-                                <span className="font-medium text-slate-300">Connected Account</span>
-                            </div>
-                            <p className="text-xs text-slate-500">
-                                Signed in via GitHub. Profile picture is synced.
-                            </p>
-                        </div>
-                    </div>
-
                     <div className="mt-8">
-                        <Link
-                            href="/api/auth/signout"
-                            className="block w-full bg-slate-800/50 hover:bg-red-900/20 hover:text-red-400 text-slate-300 text-center font-medium py-3 rounded-xl transition-colors border border-white/10 hover:border-red-900/50"
+                        <button
+                            onClick={() => setShowLogoutConfirm(true)}
+                            className="block w-full bg-slate-800/50 hover:bg-red-900/20 hover:text-red-400 text-slate-300 text-center font-medium py-3 rounded-xl transition-colors border border-white/10 hover:border-red-900/50 flex items-center justify-center gap-2"
                         >
-                            Sign Out
-                        </Link>
+                            <LogOut size={18} /> Sign Out
+                        </button>
                     </div>
                 </motion.div>
             </div>
@@ -174,6 +178,46 @@ export default function ProfilePage() {
                     onCancel={() => setIsEditing(false)}
                 />
             </Modal>
+
+            {/* Logout Confirmation Modal */}
+            <AnimatePresence>
+                {showLogoutConfirm && (
+                    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="bg-slate-900 border border-white/10 p-8 rounded-[2rem] shadow-2xl w-full max-w-sm relative overflow-hidden"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-orange-500 to-red-500"></div>
+
+                            <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/20 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                                <LogOut size={32} className="text-red-500" />
+                            </div>
+
+                            <h3 className="text-2xl font-bold text-white mb-3 text-center">Sign Out?</h3>
+                            <p className="text-slate-400 text-center mb-8 leading-relaxed">
+                                Are you sure you want to sign out? You will need to sign in again to access your account.
+                            </p>
+
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={() => setShowLogoutConfirm(false)}
+                                    className="flex-1 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-bold transition-all border border-white/5 hover:border-white/10"
+                                >
+                                    No, Stay
+                                </button>
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex-1 py-4 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white rounded-2xl font-bold transition-all shadow-lg shadow-red-500/25 hover:shadow-red-500/40 hover:-translate-y-0.5"
+                                >
+                                    Yes, Sign Out
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

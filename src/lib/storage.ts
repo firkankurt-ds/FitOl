@@ -72,6 +72,19 @@ export const saveProgram = (program: Program) => {
     localStorage.setItem(KEYS.PROGRAMS, JSON.stringify(programs));
 };
 
+export const getUniqueExercises = (): string[] => {
+    if (typeof window === 'undefined') return [];
+
+    const workouts = getWorkouts();
+    const programs = getPrograms();
+    const exercises = new Set<string>();
+
+    workouts.forEach(w => w.exercises.forEach(e => exercises.add(e.name)));
+    programs.forEach(p => p.exercises.forEach(e => exercises.add(e.name)));
+
+    return Array.from(exercises).sort();
+};
+
 // --- Initialization ---
 export const initializeDefaults = () => {
     if (typeof window === 'undefined') return;

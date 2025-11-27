@@ -22,6 +22,9 @@ export default function ProgramsPage() {
                         <ArrowLeft size={24} className="text-slate-100" />
                     </Link>
                     <h1 className="text-xl font-bold text-slate-100 ml-2">Workout Programs</h1>
+                    <Link href="/programs/new" className="ml-auto bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition-colors">
+                        + New
+                    </Link>
                 </div>
 
                 <div className="space-y-4">
