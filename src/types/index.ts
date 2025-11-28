@@ -1,7 +1,7 @@
 export interface UserProfile {
   firstName: string;
   lastName: string;
-  gender: 'Male' | 'Female' | 'Other';
+  gender: 'Male' | 'Female';
   weight: number; // in kg
   age: number;
   height?: number; // in cm

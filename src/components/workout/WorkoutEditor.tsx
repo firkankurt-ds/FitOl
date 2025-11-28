@@ -65,7 +65,7 @@ export function WorkoutEditor({ date }: WorkoutEditorProps) {
             sets: Array.from({ length: ex.defaultSets }).map(() => ({
                 id: uuidv4(),
                 reps: ex.defaultReps,
-                weight: 0,
+                weight: 20,
                 completed: false,
             })),
         }));
@@ -85,7 +85,7 @@ export function WorkoutEditor({ date }: WorkoutEditorProps) {
         newExercises[exerciseIndex].sets.push({
             id: uuidv4(),
             reps: previousSet ? previousSet.reps : 10,
-            weight: previousSet ? previousSet.weight : 0,
+            weight: previousSet ? previousSet.weight : 20,
             completed: false,
         });
         setWorkout({ ...workout, exercises: newExercises });
@@ -113,9 +113,9 @@ export function WorkoutEditor({ date }: WorkoutEditorProps) {
             id: uuidv4(),
             name: newExerciseName,
             sets: [
-                { id: uuidv4(), reps: 10, weight: 0, completed: false },
-                { id: uuidv4(), reps: 10, weight: 0, completed: false },
-                { id: uuidv4(), reps: 10, weight: 0, completed: false },
+                { id: uuidv4(), reps: 10, weight: 20, completed: false },
+                { id: uuidv4(), reps: 10, weight: 20, completed: false },
+                { id: uuidv4(), reps: 10, weight: 20, completed: false },
             ]
         };
 

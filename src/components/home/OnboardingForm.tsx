@@ -105,44 +105,97 @@ export function OnboardingForm({ onComplete }: OnboardingFormProps) {
                             <select
                                 className="w-full p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all appearance-none cursor-pointer"
                                 value={formData.gender}
-                                onChange={(e) => setFormData({ ...formData, gender: e.target.value as any })}
+                                onChange={(e) => setFormData({ ...formData, gender: e.target.value as 'Male' | 'Female' })}
                             >
                                 <option value="Male" className="bg-slate-800">Male</option>
                                 <option value="Female" className="bg-slate-800">Female</option>
-                                <option value="Other" className="bg-slate-800">Other</option>
                             </select>
                         </div>
 
                         <div className="grid grid-cols-3 gap-4">
                             <div>
                                 <label className="block text-xs font-medium text-indigo-200 mb-2 uppercase tracking-wider">Weight (kg)</label>
-                                <input
-                                    required
-                                    type="number"
-                                    className="w-full p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all"
-                                    value={formData.weight === 0 ? '' : formData.weight}
-                                    onChange={(e) => setFormData({ ...formData, weight: e.target.value === '' ? 0 : Number(e.target.value) })}
-                                />
+                                <div className="relative">
+                                    <input
+                                        required
+                                        type="number"
+                                        className="w-full p-3 pr-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all text-center font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        value={formData.weight === 0 ? '' : formData.weight}
+                                        onChange={(e) => setFormData({ ...formData, weight: e.target.value === '' ? 0 : Number(e.target.value) })}
+                                    />
+                                    <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, weight: Number(formData.weight) + 1 })}
+                                            className="flex-1 w-6 bg-white/10 hover:bg-indigo-500 text-white rounded-t flex items-center justify-center transition-colors text-xs border-b border-white/5"
+                                        >
+                                            +
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, weight: Math.max(0, Number(formData.weight) - 1) })}
+                                            className="flex-1 w-6 bg-white/10 hover:bg-indigo-500 text-white rounded-b flex items-center justify-center transition-colors text-xs"
+                                        >
+                                            −
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label className="block text-xs font-medium text-indigo-200 mb-2 uppercase tracking-wider">Height (cm)</label>
-                                <input
-                                    required
-                                    type="number"
-                                    className="w-full p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all"
-                                    value={formData.height === 0 ? '' : (formData.height || '')}
-                                    onChange={(e) => setFormData({ ...formData, height: e.target.value === '' ? 0 : Number(e.target.value) })}
-                                />
+                                <div className="relative">
+                                    <input
+                                        required
+                                        type="number"
+                                        className="w-full p-3 pr-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all text-center font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        value={formData.height === 0 ? '' : (formData.height || '')}
+                                        onChange={(e) => setFormData({ ...formData, height: e.target.value === '' ? 0 : Number(e.target.value) })}
+                                    />
+                                    <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, height: Number(formData.height) + 1 })}
+                                            className="flex-1 w-6 bg-white/10 hover:bg-indigo-500 text-white rounded-t flex items-center justify-center transition-colors text-xs border-b border-white/5"
+                                        >
+                                            +
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, height: Math.max(0, Number(formData.height) - 1) })}
+                                            className="flex-1 w-6 bg-white/10 hover:bg-indigo-500 text-white rounded-b flex items-center justify-center transition-colors text-xs"
+                                        >
+                                            −
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label className="block text-xs font-medium text-indigo-200 mb-2 uppercase tracking-wider">Age</label>
-                                <input
-                                    required
-                                    type="number"
-                                    className="w-full p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all"
-                                    value={formData.age === 0 ? '' : formData.age}
-                                    onChange={(e) => setFormData({ ...formData, age: e.target.value === '' ? 0 : Number(e.target.value) })}
-                                />
+                                <div className="relative">
+                                    <input
+                                        required
+                                        type="number"
+                                        className="w-full p-3 pr-8 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none text-white transition-all text-center font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        value={formData.age === 0 ? '' : formData.age}
+                                        onChange={(e) => setFormData({ ...formData, age: e.target.value === '' ? 0 : Number(e.target.value) })}
+                                    />
+                                    <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, age: Number(formData.age) + 1 })}
+                                            className="flex-1 w-6 bg-white/10 hover:bg-indigo-500 text-white rounded-t flex items-center justify-center transition-colors text-xs border-b border-white/5"
+                                        >
+                                            +
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, age: Math.max(0, Number(formData.age) - 1) })}
+                                            className="flex-1 w-6 bg-white/10 hover:bg-indigo-500 text-white rounded-b flex items-center justify-center transition-colors text-xs"
+                                        >
+                                            −
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

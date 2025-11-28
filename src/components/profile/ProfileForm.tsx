@@ -47,44 +47,97 @@ export function ProfileForm({ initialData, onSave, onCancel }: ProfileFormProps)
             <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-400">Age</label>
-                    <input
-                        type="number"
-                        value={formData.age === 0 ? '' : formData.age}
-                        onChange={(e) => setFormData({ ...formData, age: e.target.value === '' ? 0 : parseInt(e.target.value) })}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type="number"
+                            value={formData.age === 0 ? '' : formData.age}
+                            onChange={(e) => setFormData({ ...formData, age: e.target.value === '' ? 0 : parseInt(e.target.value) })}
+                            className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 pr-8 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-center font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            required
+                        />
+                        <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, age: Number(formData.age) + 1 })}
+                                className="flex-1 w-6 bg-slate-700 hover:bg-indigo-500 text-white rounded-t flex items-center justify-center transition-colors text-xs border-b border-slate-600"
+                            >
+                                +
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, age: Math.max(0, Number(formData.age) - 1) })}
+                                className="flex-1 w-6 bg-slate-700 hover:bg-indigo-500 text-white rounded-b flex items-center justify-center transition-colors text-xs"
+                            >
+                                −
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-400">Weight (kg)</label>
-                    <input
-                        type="number"
-                        value={formData.weight === 0 ? '' : formData.weight}
-                        onChange={(e) => setFormData({ ...formData, weight: e.target.value === '' ? 0 : parseFloat(e.target.value) })}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type="number"
+                            value={formData.weight === 0 ? '' : formData.weight}
+                            onChange={(e) => setFormData({ ...formData, weight: e.target.value === '' ? 0 : parseFloat(e.target.value) })}
+                            className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 pr-8 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-center font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            required
+                        />
+                        <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, weight: Number(formData.weight) + 1 })}
+                                className="flex-1 w-6 bg-slate-700 hover:bg-indigo-500 text-white rounded-t flex items-center justify-center transition-colors text-xs border-b border-slate-600"
+                            >
+                                +
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, weight: Math.max(0, Number(formData.weight) - 1) })}
+                                className="flex-1 w-6 bg-slate-700 hover:bg-indigo-500 text-white rounded-b flex items-center justify-center transition-colors text-xs"
+                            >
+                                −
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-400">Height (cm)</label>
-                    <input
-                        type="number"
-                        value={formData.height === 0 ? '' : (formData.height || '')}
-                        onChange={(e) => setFormData({ ...formData, height: e.target.value === '' ? 0 : parseInt(e.target.value) })}
-                        className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type="number"
+                            value={formData.height === 0 ? '' : (formData.height || '')}
+                            onChange={(e) => setFormData({ ...formData, height: e.target.value === '' ? 0 : parseInt(e.target.value) })}
+                            className="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 pr-8 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-center font-bold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            required
+                        />
+                        <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, height: Number(formData.height) + 1 })}
+                                className="flex-1 w-6 bg-slate-700 hover:bg-indigo-500 text-white rounded-t flex items-center justify-center transition-colors text-xs border-b border-slate-600"
+                            >
+                                +
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, height: Math.max(0, Number(formData.height) - 1) })}
+                                className="flex-1 w-6 bg-slate-700 hover:bg-indigo-500 text-white rounded-b flex items-center justify-center transition-colors text-xs"
+                            >
+                                −
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-400">Gender</label>
                     <select
                         value={formData.gender}
-                        onChange={(e) => setFormData({ ...formData, gender: e.target.value as 'Male' | 'Female' | 'Other' })}
+                        onChange={(e) => setFormData({ ...formData, gender: e.target.value as 'Male' | 'Female' })}
                         className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all appearance-none"
                     >
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="Other">Other</option>
                     </select>
                 </div>
             </div>
